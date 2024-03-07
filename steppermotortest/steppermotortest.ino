@@ -15,12 +15,16 @@ void setup() {
   pinMode(dirPin, OUTPUT);
   pinMode(EN, OUTPUT);
   digitalWrite(EN, LOW);  // Setting EN to low enables the motor to turn
+  Serial.begin(9600);
 }
 void loop() {
-  turn(true);
-  turn(true);
-  turn(false);
-  turn(false);
+  // turn(true);
+  // turn(true);
+  // turn(false);
+  // turn(false);
+  vector <bool> moves = {true, false, true, true, false};
+  // bool moves[5] = {true, false, true, true, false};
+  chain(moves);
   // digitalWrite(dirPin, HIGH);  // Enables the motor to move in a particular direction
   // // Makes 200 pulses for making one full cycle rotation
   // for (int x = 0; x < 400; x++) {
@@ -52,7 +56,7 @@ void loop() {
   // delay(300);  // One second delay
 }
 
-int turn(bool dir) {
+void turn(bool dir) {
   //90 degree turn
   //True is clockwise (right)
   //Falst is counterclockwise (left)
@@ -69,5 +73,17 @@ int turn(bool dir) {
       delayMicroseconds(600);
   }
   delay(200);
+}
+
+void chain(bool moves[]) {
+  Serial.print(" Size:");
+  Serial.print(moves.size());
+  for (int i = 0; i < moves.size(); i++) {
+    turn(moves[i]);
+    Serial.print(moves[i]);
+  }
+  // for (bool dir: moves) {
+
+  // }
 }
   
