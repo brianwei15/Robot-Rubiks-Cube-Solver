@@ -75,7 +75,7 @@ void turn(bool dir) {
   delay(200);
 }
 
-void chain(bool moves[]) {
+void chain(vector <bool> moves) {
   Serial.print(" Size:");
   Serial.print(moves.size());
   for (int i = 0; i < moves.size(); i++) {
