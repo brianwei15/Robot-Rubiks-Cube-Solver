@@ -33,13 +33,13 @@ void turn(int dir) {
     digitalWrite(dirPin, LOW); // counterclockwise
   }
   // 400 pulses for 90 degree turn
-  for (int x = 0; x < 400; x++) {
+  for (int x = 0; x < 405; x++) {
       digitalWrite(stepPin, HIGH);
-      delayMicroseconds(600);  // by changing this time delay between the steps we can change the rotation speed
+      delayMicroseconds(200);  // by changing this time delay between the steps we can change the rotation speed
       digitalWrite(stepPin, LOW);
-      delayMicroseconds(600);
+      delayMicroseconds(200);
   }
-  delay(200); // 0.2 second delay
+  delay(300); // 0.2 second delay
 }
 
 void chain(int moves[], int size) {
