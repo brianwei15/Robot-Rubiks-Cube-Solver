@@ -18,72 +18,33 @@ void setup() {
   Serial.begin(9600);
 }
 void loop() {
-  // turn(true);
-  // turn(true);
-  // turn(false);
-  // turn(false);
-  vector <bool> moves = {true, false, true, true, false};
-  // bool moves[5] = {true, false, true, true, false};
-  chain(moves);
-  // digitalWrite(dirPin, HIGH);  // Enables the motor to move in a particular direction
-  // // Makes 200 pulses for making one full cycle rotation
-  // for (int x = 0; x < 400; x++) {
-  //   digitalWrite(stepPin, HIGH);
-  //   delayMicroseconds(600);  // by changing this time delay between the steps we can change the rotation speed
-  //   digitalWrite(stepPin, LOW);
-  //   delayMicroseconds(600);
-  // }
-  // delay(300);  // One second delay
-
-  // digitalWrite(dirPin, HIGH);  // Enables the motor to move in a particular direction
-  // // Makes 200 pulses for making one full cycle rotation
-  // for (int x = 0; x < 400; x++) {
-  //   digitalWrite(stepPin, HIGH);
-  //   delayMicroseconds(600);  // by changing this time delay between the steps we can change the rotation speed
-  //   digitalWrite(stepPin, LOW);
-  //   delayMicroseconds(600);
-  // }
-  // delay(300);  // One second delay
-
-  // digitalWrite(dirPin, LOW);  // Enables the motor to move in a particular direction
-  // // Makes 200 pulses for making one full cycle rotation
-  // for (int x = 0; x < 400; x++) {
-  //   digitalWrite(stepPin, HIGH);
-  //   delayMicroseconds(600);  // by changing this time delay between the steps we can change the rotation speed
-  //   digitalWrite(stepPin, LOW);
-  //   delayMicroseconds(600);
-  // }
-  // delay(300);  // One second delay
+  int moves[5] = {1, 0, 1, 1, 0};
+  int size = sizeof(moves)/sizeof(int);
+  chain(moves, size);
 }
 
-void turn(bool dir) {
-  //90 degree turn
-  //True is clockwise (right)
-  //Falst is counterclockwise (left)
-  if (dir) {
-    digitalWrite(dirPin, HIGH);
+void turn(int dir) {
+  //1 is clockwise (right)
+  //0 is counterclockwise (left)
+  if (dir == 1) {
+    digitalWrite(dirPin, HIGH); // clockwise
   }
   else {
-    digitalWrite(dirPin, LOW);
+    digitalWrite(dirPin, LOW); // counterclockwise
   }
+  // 400 pulses for 90 degree turn
   for (int x = 0; x < 400; x++) {
       digitalWrite(stepPin, HIGH);
       delayMicroseconds(600);  // by changing this time delay between the steps we can change the rotation speed
       digitalWrite(stepPin, LOW);
       delayMicroseconds(600);
   }
-  delay(200);
+  delay(200); // 0.2 second delay
 }
 
-void chain(vector <bool> moves) {
-  Serial.print(" Size:");
-  Serial.print(moves.size());
-  for (int i = 0; i < moves.size(); i++) {
+void chain(int moves[], int size) {
+  for (int i = 0; i < size; i++) {
     turn(moves[i]);
     Serial.print(moves[i]);
   }
-  // for (bool dir: moves) {
-
-  // }
 }
-  
