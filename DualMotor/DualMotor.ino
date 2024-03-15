@@ -24,12 +24,19 @@ void setup() {
 }
 
 void loop() {
-  int moves1[1] = {1};
-  int moves2[1] = {0};
-  int size = sizeof(moves1)/sizeof(int);
+  //motors are marked 1-6 (1: bottom 2: side for now)
+  //first number is motor second number is direction (1: clockwise, 2: counterclockwise)
+  int moves[4] = {11, 21, 10, 20};
+  // int moves1[2] = {1};
+  // int moves2[1] = {1};
+  // int moves3[1] = {0};
+  // int moves4[1] = {0};
+  int size = sizeof(moves)/sizeof(int);
 
-  chain(moves1, size, 1); // Chain movements for the first motor
-  chain(moves2, size, 2); // Chain movements for the second motor
+  // chain(moves1, size, 1); // Chain movements for the first motor
+  // chain(moves2, size, 2); // Chain movements for the second motor
+  // chain(moves3, size, 1); // Chain movements for the first motor
+  chain(moves, size);
 }
 
 void turn(int dir, int motor) {
@@ -40,9 +47,9 @@ void turn(int dir, int motor) {
 
     for (int x = 0; x < 400; x++) {
       digitalWrite(stepPin, HIGH);
-      delayMicroseconds(500);
+      delayMicroseconds(200);
       digitalWrite(stepPin, LOW);
-      delayMicroseconds(500);
+      delayMicroseconds(200);
     }
   } else if (motor == 2) {
     // Control for the second motor
@@ -51,20 +58,22 @@ void turn(int dir, int motor) {
 
     for (int x = 0; x < 400; x++) {
       digitalWrite(stepPin2, HIGH);
-      delayMicroseconds(500);
+      delayMicroseconds(200);
       digitalWrite(stepPin2, LOW);
-      delayMicroseconds(500);
+      delayMicroseconds(200);
     }
   }
-  delay(500); // delay between commands
+  //delay(300); // delay between commands
 }
 
-void chain(int moves[], int size, int motor) {
+void chain(int moves[], int size) {
   for (int i = 0; i < size; i++) {
-    turn(moves[i], motor);
+    int motornum = moves[i] / 10;
+    int turndir = moves[i] % 10;
+    turn(turndir, motornum);
     Serial.print("Motor ");
-    Serial.print(motor);
+    Serial.print(motornum);
     Serial.print(": ");
-    Serial.println(moves[i]);
+    Serial.println(turndir);
   }
 }
