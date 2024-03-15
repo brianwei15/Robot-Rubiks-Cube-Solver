@@ -5,9 +5,17 @@
  */
 
 // defines pins
-#define stepPin 5
-#define dirPin 3
-#define EN 6
+// #define stepPin 5
+// #define dirPin 3
+// #define EN 6
+
+#define stepPin1 3
+#define dirPin1 4
+#define EN1 2
+
+#define stepPin2 6
+#define dirPin2 7
+#define EN2 5
 
 void setup() {
   // Sets the three pins as Outputs
