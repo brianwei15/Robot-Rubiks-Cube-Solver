@@ -1,7 +1,7 @@
 // defines pins for the first motor
-#define stepPin 3
-#define dirPin 4
-#define EN 2
+#define stepPin1 3
+#define dirPin1 4
+#define EN1 2
 
 // defines pins for the second motor
 #define stepPin2 6
@@ -10,10 +10,10 @@
 
 void setup() {
   // Sets the six pins as Outputs
-  pinMode(stepPin, OUTPUT);
-  pinMode(dirPin, OUTPUT);
-  pinMode(EN, OUTPUT);
-  digitalWrite(EN, LOW); // Enables the first motor
+  pinMode(stepPin1, OUTPUT);
+  pinMode(dirPin1, OUTPUT);
+  pinMode(EN1, OUTPUT);
+  digitalWrite(EN1, LOW); // Enables the first motor
 
   pinMode(stepPin2, OUTPUT);
   pinMode(dirPin2, OUTPUT);
@@ -27,42 +27,43 @@ void loop() {
   //motors are marked 1-6 (1: bottom 2: side for now)
   //first number is motor second number is direction (1: clockwise, 2: counterclockwise)
   int moves[4] = {11, 21, 10, 20};
-  // int moves1[2] = {1};
-  // int moves2[1] = {1};
-  // int moves3[1] = {0};
-  // int moves4[1] = {0};
   int size = sizeof(moves)/sizeof(int);
-
-  // chain(moves1, size, 1); // Chain movements for the first motor
-  // chain(moves2, size, 2); // Chain movements for the second motor
-  // chain(moves3, size, 1); // Chain movements for the first motor
   chain(moves, size);
 }
 
 void turn(int dir, int motor) {
-  if (motor == 1) {
-    // Control for the first motor
-    if (dir == 1) digitalWrite(dirPin, HIGH); // clockwise
-    else digitalWrite(dirPin, LOW); // counterclockwise
+  if (dir == 1) digitalWrite(4+3*(motor-1), HIGH); // clockwise
+    else digitalWrite(4+3*(motor-1), LOW); // counterclockwise
 
     for (int x = 0; x < 400; x++) {
-      digitalWrite(stepPin, HIGH);
+      digitalWrite(3+3*(motor-1), HIGH);
       delayMicroseconds(200);
-      digitalWrite(stepPin, LOW);
+      digitalWrite(3+3*(motor-1), LOW);
       delayMicroseconds(200);
     }
-  } else if (motor == 2) {
-    // Control for the second motor
-    if (dir == 1) digitalWrite(dirPin2, HIGH); // clockwise
-    else digitalWrite(dirPin2, LOW); // counterclockwise
+  // if (motor == 1) {
+  //   // Control for the first motor
+  //   if (dir == 1) digitalWrite(dirPin, HIGH); // clockwise
+  //   else digitalWrite(dirPin, LOW); // counterclockwise
 
-    for (int x = 0; x < 400; x++) {
-      digitalWrite(stepPin2, HIGH);
-      delayMicroseconds(200);
-      digitalWrite(stepPin2, LOW);
-      delayMicroseconds(200);
-    }
-  }
+  //   for (int x = 0; x < 400; x++) {
+  //     digitalWrite(stepPin, HIGH);
+  //     delayMicroseconds(200);
+  //     digitalWrite(stepPin, LOW);
+  //     delayMicroseconds(200);
+  //   }
+  // } else if (motor == 2) {
+  //   // Control for the second motor
+  //   if (dir == 1) digitalWrite(dirPin2, HIGH); // clockwise
+  //   else digitalWrite(dirPin2, LOW); // counterclockwise
+
+  //   for (int x = 0; x < 400; x++) {
+  //     digitalWrite(stepPin2, HIGH);
+  //     delayMicroseconds(200);
+  //     digitalWrite(stepPin2, LOW);
+  //     delayMicroseconds(200);
+  //   }
+  // }
   //delay(300); // delay between commands
 }
 
