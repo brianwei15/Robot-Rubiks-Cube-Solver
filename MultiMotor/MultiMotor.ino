@@ -1,3 +1,5 @@
+// these intial variables are basically just for reference now because we ordered the pins so that they were in a loopable pattern
+
 // defines pins for motor 1
 #define stepPin1 3
 #define dirPin1 4
@@ -14,21 +16,29 @@
 #define EN3 8
 
 void setup() {
-  // Sets the six pins as Outputs
-  pinMode(stepPin1, OUTPUT);
-  pinMode(dirPin1, OUTPUT);
-  pinMode(EN1, OUTPUT);
-  digitalWrite(EN1, LOW); // Enables the first motor
+  // Enables all motors
+  for (int i = 0; i < 3; i++) {
+    pinMode(3+3*i, OUTPUT);
+    pinMode(4+3*i, OUTPUT);
+    pinMode(2+3*i, OUTPUT);
+    digitalWrite(2+3*i, LOW); 
+  }
 
-  pinMode(stepPin2, OUTPUT);
-  pinMode(dirPin2, OUTPUT);
-  pinMode(EN2, OUTPUT);
-  digitalWrite(EN2, LOW); // Enables the second motor
+  // // Sets the six pins as Outputs
+  // pinMode(stepPin1, OUTPUT);
+  // pinMode(dirPin1, OUTPUT);
+  // pinMode(EN1, OUTPUT);
+  // digitalWrite(EN1, LOW); // Enables the first motor
 
-  pinMode(stepPin3, OUTPUT);
-  pinMode(dirPin3, OUTPUT);
-  pinMode(EN3, OUTPUT);
-  digitalWrite(EN3, LOW); // Enables the third motor
+  // pinMode(stepPin2, OUTPUT);
+  // pinMode(dirPin2, OUTPUT);
+  // pinMode(EN2, OUTPUT);
+  // digitalWrite(EN2, LOW); // Enables the second motor
+
+  // pinMode(stepPin3, OUTPUT);
+  // pinMode(dirPin3, OUTPUT);
+  // pinMode(EN3, OUTPUT);
+  // digitalWrite(EN3, LOW); // Enables the third motor
 
 
   Serial.begin(9600);
