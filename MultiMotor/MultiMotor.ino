@@ -21,7 +21,7 @@ void setup() {
     pinMode(3+3*i, OUTPUT);
     pinMode(4+3*i, OUTPUT);
     pinMode(2+3*i, OUTPUT);
-    digitalWrite(2+3*i, LOW); 
+    digitalWrite(2+3*i, LOW);
   }
 
   // // Sets the six pins as Outputs
