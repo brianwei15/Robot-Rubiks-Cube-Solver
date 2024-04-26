@@ -32,20 +32,22 @@ void loop() {
 
 void interpretCommand(int command) {
   switch (command) {
-    case 'U': // Up arrow
-      turn(1, 1); // Example: turn motor 1 clockwise
+    case '11': // Up arrow
+      turn(1, 1); //turn motor 1 clockwise
       break;
-    case 'D': // Down arrow
-      turn(2, 1); // Example: turn motor 1 counter-clockwise
+    case '21': // Down arrow
+      turn(2, 1); //turn motor 1 counter-clockwise
       break;
-    case 'L': // Left arrow
-      turn(1, 2); // Example: turn motor 2 clockwise
+    case '12': // Left arrow
+      turn(1, 2); //turn motor 2 clockwise
       break;
-    case 'R': // Right arrow
-      turn(2, 2); // Example: turn motor 2 counter-clockwise
+    case '22': // Right arrow
+      turn(2, 2); //turn motor 2 counter-clockwise
+      break;
+    case 't':
+      holdTurn(1,1);
       break;
     default:
-      // Handle other cases or do nothing
       break;
   }
 }
@@ -60,6 +62,15 @@ void turn(int dir, int motor) {
       digitalWrite(3+3*(motor-1), LOW);
       delayMicroseconds(200);
     }
+}
+void holdTurn(int dir, int motor) {
+  if (dir == 1) digitalWrite(4+3*(motor-1), HIGH); // clockwise
+    else digitalWrite(4+3*(motor-1), LOW); // counterclockwise   
+      digitalWrite(3+3*(motor-1), HIGH);
+      delayMicroseconds(200);
+      digitalWrite(3+3*(motor-1), LOW);
+      delayMicroseconds(200);
+    
 }
 
 void chain(int moves[], int size) {
