@@ -85,12 +85,12 @@ def get_color_name(rgb_color):
     """
     # Define color ranges and corresponding color names
     color_ranges = {
-        'orange': (np.array([0, 62, 155]), np.array([58, 120, 230])),
-        'yellow': (np.array([0, 110, 130]), np.array([80, 175, 220])),
+        'orange': (np.array([20, 85, 155]), np.array([75, 131, 245])),
+        'yellow': (np.array([0, 110, 130]), np.array([83, 185, 220])),
         'blue': (np.array([80, 40, 0]), np.array([170, 130, 100])),
-        'green': (np.array([40, 100, 20]), np.array([100, 180, 95])),
-        'white': (np.array([90, 110, 120]), np.array([160, 180, 190])),
-        'red': (np.array([20, 20, 140]), np.array([70, 76, 225]))
+        'green': (np.array([40, 100, 20]), np.array([100, 180, 105])),
+        'white': (np.array([90, 110, 120]), np.array([180, 200, 210])),
+        'red': (np.array([20, 20, 100]), np.array([80, 93, 240]))
     }
 
     # Check the average color against predefined color ranges
