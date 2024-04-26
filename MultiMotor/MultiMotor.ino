@@ -17,7 +17,7 @@
 
 void setup() {
   // Enables all motors
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 6; i++) {
     pinMode(3+3*i, OUTPUT);
     pinMode(4+3*i, OUTPUT);
     pinMode(2+3*i, OUTPUT);
@@ -47,7 +47,7 @@ void setup() {
 void loop() {
   //motors are marked 1-6 (1: bottom 2: side for now)
   //first number is motor second number is direction (1: clockwise, 2: counterclockwise)
-  int moves[6] = {11, 21, 31, 10, 20, 30};
+  int moves[12] = {11, 21, 31, 41, 51, 61, 10, 20, 30, 40, 50, 60};
   int size = sizeof(moves)/sizeof(int);
   chain(moves, size);
 }
