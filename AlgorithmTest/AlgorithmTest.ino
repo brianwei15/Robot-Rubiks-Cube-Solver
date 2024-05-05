@@ -62,7 +62,7 @@ void chain(int moves[], int size) {
   }
 }
 
-//solve the cube with the kociemba algorithm
+//solve the cube with the kociemba algorithm **taken from online source
 void solveCube() {
   for (auto s : cube) {
     em = 0;  //time taken to find a solution
