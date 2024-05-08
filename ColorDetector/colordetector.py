@@ -86,9 +86,9 @@ def get_color_name(rgb_color):
     # Define color ranges and corresponding color names
     color_ranges = {
         'orange': (np.array([20, 85, 155]), np.array([75, 131, 245])),
-        'yellow': (np.array([0, 110, 130]), np.array([83, 185, 220])),
+        'yellow': (np.array([0, 110, 110]), np.array([83, 185, 220])),
         'blue': (np.array([80, 40, 0]), np.array([170, 130, 100])),
-        'green': (np.array([40, 100, 20]), np.array([100, 180, 105])),
+        'green': (np.array([30, 100, 18]), np.array([100, 180, 105])),
         'white': (np.array([90, 110, 120]), np.array([180, 200, 210])),
         'red': (np.array([20, 20, 100]), np.array([80, 93, 240]))
     }
@@ -142,19 +142,42 @@ def main():
         key = cv2.waitKey(1) & 0xFF
 
         if key == ord('s'):
-            # Process each grid cell to detect and print color
-            for i, cell in enumerate(cells):
-                # Calculate the average color of the cell
-                average_color = get_average_color(cell)
+            # # Process each grid cell to detect and print color
+            # for i, cell in enumerate(cells):
+            #     # Calculate the average color of the cell
+            #     average_color = get_average_color(cell)
 
-                # Determine the color name based on the average color
-                color_name = get_color_name(average_color)
+            #     # Determine the color name based on the average color
+            #     color_name = get_color_name(average_color)
 
-                # Format RGB values as string
-                rgb_str = f"({average_color[0]}, {average_color[1]}, {average_color[2]})"
+            #     # Format RGB values as string
+            #     rgb_str = f"({average_color[0]}, {average_color[1]}, {average_color[2]})"
 
-                # Display the detected color name and RGB values
-                print(f"Cell {i}: {color_name.capitalize()} {rgb_str}")
+            #     # Display the detected color name and RGB values
+            #     print(f"Cell {i}: {color_name.capitalize()} {rgb_str}")
+            # Create a 3x3 grid to store color information
+            color_grid = [['' for _ in range(3)] for _ in range(3)]
+
+            # Process each grid cell to detect and store color names
+            for r in range(3):
+                for c in range(3):
+                    # Get the current cell
+                    cell = cells[r * 3 + c]
+
+                    # Calculate the average color of the cell
+                    average_color = get_average_color(cell)
+
+                    # Determine the color name based on the average color
+                    color_name = get_color_name(average_color)
+
+                    # Store color name in the color grid
+                    color_grid[r][c] = color_name.capitalize()
+
+            # Print the color grid with extra spacing for readability
+            print("S to Update | C to Confirm | Q to Exit")
+            for row in color_grid:
+                print(' | '.join(row))
+                print('-' * 21)  # Add a horizontal divider between rows
 
         elif key == ord('q'):  # Press 'q' to quit the program
             break  # Exit the main loop and end the program
