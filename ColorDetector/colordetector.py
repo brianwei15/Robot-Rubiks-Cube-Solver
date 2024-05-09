@@ -101,88 +101,68 @@ def get_color_name(rgb_color):
     return 'unknown'
 
 def main():
-    # Initialize camera capture (0 for default camera)
+    global accumulated_letters
+
     cap = cv2.VideoCapture(0)
 
     if not cap.isOpened():
         print("Error: Could not open camera.")
         return
 
+    accumulated_letters = ""
+    current_letters_grid = [['' for _ in range(3)] for _ in range(3)]  # Initialize grid for current letters
+
     while True:
-        # Capture frame-by-frame
         ret, frame = cap.read()
 
         if not ret:
             print("Error: Failed to capture frame.")
             break
 
-        # Flip the frame horizontally
         frame = cv2.flip(frame, 1)
 
-        # Get dimensions of the frame
         height, width, _ = frame.shape
-
-        # Determine the size of the square window (use the minimum dimension)
         size = min(height, width)
-
-        # Crop the frame to a square
         square_frame = frame[(height - size) // 2:(height + size) // 2,
                              (width - size) // 2:(width + size) // 2]
 
-        # Split the square frame into a 3x3 grid of cells
         cells = split_into_grid(square_frame, grid_size=(3, 3))
-
-        # Draw grid lines on the square frame
         grid_frame = draw_grid(square_frame, grid_size=(3, 3))
 
-        # Display the frame with grid lines
         cv2.imshow('Camera with Grid', grid_frame)
 
-        # Check for key press
         key = cv2.waitKey(1) & 0xFF
 
         if key == ord('s'):
-            # # Process each grid cell to detect and print color
-            # for i, cell in enumerate(cells):
-            #     # Calculate the average color of the cell
-            #     average_color = get_average_color(cell)
+            current_letters_grid = [['' for _ in range(3)] for _ in range(3)]  # Reset current letters grid
 
-            #     # Determine the color name based on the average color
-            #     color_name = get_color_name(average_color)
-
-            #     # Format RGB values as string
-            #     rgb_str = f"({average_color[0]}, {average_color[1]}, {average_color[2]})"
-
-            #     # Display the detected color name and RGB values
-            #     print(f"Cell {i}: {color_name.capitalize()} {rgb_str}")
-            # Create a 3x3 grid to store color information
-            color_grid = [['' for _ in range(3)] for _ in range(3)]
-
-            # Process each grid cell to detect and store color names
             for r in range(3):
                 for c in range(3):
-                    # Get the current cell
                     cell = cells[r * 3 + c]
-
-                    # Calculate the average color of the cell
                     average_color = get_average_color(cell)
-
-                    # Determine the color name based on the average color
                     color_name = get_color_name(average_color)
+                    first_letter = color_name[0].upper()  # Get the first letter and convert to uppercase
+                    current_letters_grid[r][c] = first_letter
 
-                    # Store color name in the color grid
-                    color_grid[r][c] = color_name.capitalize()
+            print("S to Scan | C to Confirm | R to Remove | Q to Quit")
+            for row in current_letters_grid:
+                print(' '.join(row))
 
-            # Print the color grid with extra spacing for readability
-            print("S to Update | C to Confirm | Q to Exit")
-            for row in color_grid:
-                print(' | '.join(row))
-                print('-' * 21)  # Add a horizontal divider between rows
+        elif key == ord('c'):
+            # Flatten the grid of letters into a single string and append to accumulated_letters
+            current_letters = ''.join([''.join(row) for row in current_letters_grid])
+            if current_letters:
+                accumulated_letters += current_letters
+                print("Output:", accumulated_letters)
 
-        elif key == ord('q'):  # Press 'q' to quit the program
-            break  # Exit the main loop and end the program
+        elif key == ord('r'):
+            # Remove last 9 letters from accumulated_letters
+            accumulated_letters = accumulated_letters[:-9]
+            print("Output:", accumulated_letters)
 
-    # Release the camera and close all OpenCV windows
+        elif key == ord('q'):
+            break
+
     cap.release()
     cv2.destroyAllWindows()
 
