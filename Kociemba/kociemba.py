@@ -1,3 +1,5 @@
+# pip install RubikTwoPhase
+
 import twophase.solver  as sv
 
 cubestring = 'DUUBULDBFRBFRRULLLBRDFFFBLURDBFDFDRFRULBLUFDURRBLBDUDL'
