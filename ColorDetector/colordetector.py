@@ -100,8 +100,33 @@ def get_color_name(rgb_color):
     
     return 'unknown'
 
+def convert_to_cube_colors(accumulated_letters):
+    """
+    Convert accumulated color letters to cube side colors.
+
+    Args:
+        accumulated_letters (str): String of accumulated color letters.
+
+    Returns:
+        str: String representing cube side colors.
+    """
+    color_mapping = {
+        'B': 'F',  # Blue becomes Front
+        'W': 'U',  # White becomes Up
+        'G': 'B',  # Green becomes Back
+        'R': 'L',  # Red becomes Left
+        'O': 'R',  # Orange becomes Right
+        'Y': 'D'   # Yellow becomes Down
+    }
+
+    # Replace each color letter with its corresponding cube side color
+    cube_colors = ''.join([color_mapping.get(letter, '') for letter in accumulated_letters])
+
+    return cube_colors
+
 def main():
     global accumulated_letters
+    global colorToSide
 
     cap = cv2.VideoCapture(0)
 
@@ -150,7 +175,7 @@ def main():
 
         elif key == ord('c'):
             # Flatten the grid of letters into a single string and append to accumulated_letters
-            current_letters = ''.join([''.join(row) for row in current_letters_grid])
+            current_letters = ''.join([''.join(row[::-1]) for row in current_letters_grid])
             if current_letters:
                 accumulated_letters += current_letters
                 print("Output:", accumulated_letters)
@@ -161,6 +186,8 @@ def main():
             print("Output:", accumulated_letters)
 
         elif key == ord('q'):
+            colorToSide = convert_to_cube_colors(accumulated_letters)
+            print("Cube Side Colors:", colorToSide)
             break
 
     cap.release()
@@ -168,3 +195,9 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+import twophase.solver  as sv
+
+cubestring = colorToSide
+
+print(sv.solve(cubestring,19,2))
