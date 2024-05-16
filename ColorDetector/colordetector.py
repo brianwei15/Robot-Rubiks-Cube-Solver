@@ -201,3 +201,10 @@ import twophase.solver  as sv
 cubestring = colorToSide
 
 print(sv.solve(cubestring,19,2))
+
+# WG
+# OW
+# BW
+# YB
+# RW
+# GW
