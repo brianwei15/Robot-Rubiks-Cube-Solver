@@ -1,6 +1,9 @@
 # pip install RubikTwoPhase
 
 import twophase.solver  as sv
+import serial
+
+arduino = serial.Serial('COM4', 9600) #arduino
 
 cubestring = 'DUUBULDBFRBFRRULLLBRDFFFBLURDBFDFDRFRULBLUFDURRBLBDUDL'
 
@@ -44,5 +47,5 @@ for character in movesstring:
         case default:
             continue
 
-
+arduino.write(newmoves)
 print(newmoves)
