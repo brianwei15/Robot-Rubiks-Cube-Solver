@@ -12,14 +12,11 @@ def send_command(key):
         arduino.write(b'12')
     elif key.name == 'right':
         arduino.write(b'22')
-    elif key.name == 't':
-        arduino.write(b't')
 
 keyboard.on_press_key("up", send_command)
 keyboard.on_press_key("down", send_command)
 keyboard.on_press_key("left", send_command)
 keyboard.on_press_key("right", send_command)
-keyboard.on_press_key("t", send_command)
 
 # Keep the script running
 keyboard.wait('esc')
