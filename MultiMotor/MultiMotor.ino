@@ -51,17 +51,24 @@ void loop() {
   int size = sizeof(moves)/sizeof(int);
   chain(moves, size);
 }
-
+int turnangle = 400;
 void turn(int dir, int motor) {
-  if (dir == 1) digitalWrite(4+3*(motor-1), HIGH); // clockwise
-    else digitalWrite(4+3*(motor-1), LOW); // counterclockwise
-
-    for (int x = 0; x < 400; x++) {
-      digitalWrite(3+3*(motor-1), HIGH);
-      delayMicroseconds(200);
-      digitalWrite(3+3*(motor-1), LOW);
-      delayMicroseconds(200);
-    }
+  if (dir == 1) {// clockwise
+    digitalWrite(4+3*(motor-1), HIGH); 
+  }
+  else if (dir == 2) {// 180
+    digitalWrite(4+3*(motor-1), HIGH); 
+    turnangle = 800;
+  }
+  else {// counterclockwise
+    digitalWrite(4+3*(motor-1), LOW); 
+  }
+  for (int x = 0; x < turnangle; x++) {
+    digitalWrite(3+3*(motor-1), HIGH);
+    delayMicroseconds(200);
+    digitalWrite(3+3*(motor-1), LOW);
+    delayMicroseconds(200);
+  }
   // if (motor == 1) {
   //   // Control for the first motor
   //   if (dir == 1) digitalWrite(dirPin, HIGH); // clockwise
