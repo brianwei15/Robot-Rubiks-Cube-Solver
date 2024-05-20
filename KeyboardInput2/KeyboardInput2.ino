@@ -44,9 +44,6 @@ void interpretCommand(int command) {
     case '22': // Right arrow
       turn(2, 2); //turn motor 2 counter-clockwise
       break;
-    case 't':
-      holdTurn(1,1);
-      break;
     default:
       break;
   }
@@ -62,15 +59,6 @@ void turn(int dir, int motor) {
       digitalWrite(3+3*(motor-1), LOW);
       delayMicroseconds(200);
     }
-}
-void holdTurn(int dir, int motor) {
-  if (dir == 1) digitalWrite(4+3*(motor-1), HIGH); // clockwise
-    else digitalWrite(4+3*(motor-1), LOW); // counterclockwise   
-      digitalWrite(3+3*(motor-1), HIGH);
-      delayMicroseconds(200);
-      digitalWrite(3+3*(motor-1), LOW);
-      delayMicroseconds(200);
-    
 }
 
 void chain(int moves[], int size) {
