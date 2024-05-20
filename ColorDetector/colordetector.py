@@ -203,6 +203,8 @@ cubestring = colorToSide
 #map solution string to string that arduino can read
 moves = sv.solve(cubestring, 19, 2)
 
+print(moves)
+
 nummoves = moves[-4:-2] #the number of moves needed to solve the cube
 print("num of moves: " + nummoves)
 movesstring = moves[:-6] #substring the last part of the string which outputs the number of moves it will take
