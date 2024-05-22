@@ -47,52 +47,33 @@ void setup() {
 void loop() {
   //motors are marked 1-6 (1: bottom 2: side for now)
   //first number is motor second number is direction (1: clockwise, 2: counterclockwise)
-  int moves[12] = {11, 21, 31, 41, 51, 61, 10, 20, 30, 40, 50, 60};
+  int moves[20] = {11, 11, 11, 21, 31, 41, 51, 61, 10, 20, 30, 40, 50, 60, 12, 22, 32, 42, 52, 62};
   int size = sizeof(moves)/sizeof(int);
   chain(moves, size);
 }
-int turnangle = 400;
+
 void turn(int dir, int motor) {
+//accounts for clockwise 90 degree, counterclockwise 90 degree, and 180 degree turns
+int angle;
   if (dir == 1) {// clockwise
     digitalWrite(4+3*(motor-1), HIGH); 
+    angle = 400;
   }
   else if (dir == 2) {// 180
     digitalWrite(4+3*(motor-1), HIGH); 
-    turnangle = 800;
+    angle = 800;
   }
   else {// counterclockwise
     digitalWrite(4+3*(motor-1), LOW); 
+    angle = 400;
   }
-  for (int x = 0; x < turnangle; x++) {
-    digitalWrite(3+3*(motor-1), HIGH);
-    delayMicroseconds(200);
-    digitalWrite(3+3*(motor-1), LOW);
-    delayMicroseconds(200);
-  }
-  // if (motor == 1) {
-  //   // Control for the first motor
-  //   if (dir == 1) digitalWrite(dirPin, HIGH); // clockwise
-  //   else digitalWrite(dirPin, LOW); // counterclockwise
-
-  //   for (int x = 0; x < 400; x++) {
-  //     digitalWrite(stepPin, HIGH);
-  //     delayMicroseconds(200);
-  //     digitalWrite(stepPin, LOW);
-  //     delayMicroseconds(200);
-  //   }
-  // } else if (motor == 2) {
-  //   // Control for the second motor
-  //   if (dir == 1) digitalWrite(dirPin2, HIGH); // clockwise
-  //   else digitalWrite(dirPin2, LOW); // counterclockwise
-
-  //   for (int x = 0; x < 400; x++) {
-  //     digitalWrite(stepPin2, HIGH);
-  //     delayMicroseconds(200);
-  //     digitalWrite(stepPin2, LOW);
-  //     delayMicroseconds(200);
-  //   }
-  // }
-  //delay(300); // delay between commands
+  for (int x = 0; x < angle; x++) {
+      digitalWrite(3+3*(motor-1), HIGH);
+      delayMicroseconds(200);
+      digitalWrite(3+3*(motor-1), LOW);
+      delayMicroseconds(200);
+    }
+  delay(100);
 }
 
 void chain(int moves[], int size) {
