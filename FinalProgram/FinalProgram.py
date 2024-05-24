@@ -232,13 +232,13 @@ for character in movesstring:
             newmoves += "6"
             continue
         case "1": #clockwise
-            newmoves += "0 "
+            newmoves += "0"
             continue
         case "2": #180degrees
-            newmoves += "2 "
+            newmoves += "2"
             continue
         case "3": #counterclockwise
-            newmoves += "1 "
+            newmoves += "1"
             continue
         case default:
             continue
