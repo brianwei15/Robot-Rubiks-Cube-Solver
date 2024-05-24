@@ -1,20 +1,5 @@
 // these intial variables are basically just for reference now because we ordered the pins so that they were in a loopable pattern
 
-// defines pins for motor 1
-#define stepPin1 3
-#define dirPin1 4
-#define EN1 2
-
-// defines pins for motor 2
-#define stepPin2 6
-#define dirPin2 7
-#define EN2 5
-
-// defines pins for motor 3
-#define stepPin3 9
-#define dirPin3 10
-#define EN3 8
-
 void setup() {
   // Enables all motors
   for (int i = 0; i < 6; i++) {

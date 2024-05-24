@@ -2,7 +2,7 @@ import serial
 import time
 
 
-ser = serial.Serial('COM7', 9600, timeout=1)
+ser = serial.Serial('COM6', 9600, timeout=1)
 time.sleep(2)  
 
 def send_commands(commands):
@@ -10,7 +10,6 @@ def send_commands(commands):
     for i in range(0, len(commands), 2):
         command = commands[i:i+2] + "\n"
         ser.write(command.encode())
-        time.sleep(1)  
 
 if __name__ == "__main__":
     try:
