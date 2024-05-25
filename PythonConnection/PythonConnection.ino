@@ -41,4 +41,5 @@ void turn(int dir, int motor) {
     digitalWrite(stepPin, LOW);
     delayMicroseconds(200);
   }
+  delay(200);
 }

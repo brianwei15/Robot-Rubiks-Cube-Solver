@@ -214,22 +214,22 @@ newmoves = "" #new formatted string
 for character in movesstring:
     match character:
         case "U":
-            newmoves += "1"
+            newmoves += "6"
             continue
         case "R":
-            newmoves += "2"
-            continue
-        case "F":
             newmoves += "3"
             continue
-        case "D":
-            newmoves += "4"
+        case "F":
+            newmoves += "2"
             continue
-        case "L":
+        case "D":
             newmoves += "5"
             continue
+        case "L":
+            newmoves += "1"
+            continue
         case "B":
-            newmoves += "6"
+            newmoves += "4"
             continue
         case "1": #clockwise
             newmoves += "0"

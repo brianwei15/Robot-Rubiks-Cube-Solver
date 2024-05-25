@@ -32,7 +32,7 @@ void setup() {
 void loop() {
   //motors are marked 1-6 (1: bottom 2: side for now)
   //first number is motor second number is direction (1: clockwise, 2: counterclockwise)
-  int moves[20] = {11, 11, 11, 21, 31, 41, 51, 61, 10, 20, 30, 40, 50, 60, 12, 22, 32, 42, 52, 62};
+  int moves[17] = {11, 11, 11, 21, 31, 41, 51, 10, 20, 30, 40, 50, 12, 22, 32, 42, 52};
   int size = sizeof(moves)/sizeof(int);
   chain(moves, size);
 }

@@ -1,9 +1,9 @@
 # pip install RubikTwoPhase
 
-import twophase.solver  as sv
+import twophase.solver as sv
 import serial
 
-arduino = serial.Serial('COM4', 9600) #arduino
+arduino = serial.Serial('COM6', 9600) #arduino
 
 cubestring = 'DUUBULDBFRBFRRULLLBRDFFFBLURDBFDFDRFRULBLUFDURRBLBDUDL'
 
