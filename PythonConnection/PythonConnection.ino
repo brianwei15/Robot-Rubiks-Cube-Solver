@@ -29,17 +29,40 @@ void serialEvent() {
   }
 }
 
+// void turn(int dir, int motor) {
+//   int stepPin = 3 + 3 * (motor - 1);
+//   int dirPin = 4 + 3 * (motor - 1);
+
+//   digitalWrite(dirPin, dir == 1 ? HIGH : LOW); // Set direction
+
+//   for (int x = 0; x < 400; x++) { // Perform steps
+//     digitalWrite(stepPin, HIGH);
+//     delayMicroseconds(200);
+//     digitalWrite(stepPin, LOW);
+//     delayMicroseconds(200);
+//   }
+//   delay(200);
+// }
+
 void turn(int dir, int motor) {
-  int stepPin = 3 + 3 * (motor - 1);
-  int dirPin = 4 + 3 * (motor - 1);
-
-  digitalWrite(dirPin, dir == 1 ? HIGH : LOW); // Set direction
-
-  for (int x = 0; x < 400; x++) { // Perform steps
-    digitalWrite(stepPin, HIGH);
-    delayMicroseconds(200);
-    digitalWrite(stepPin, LOW);
-    delayMicroseconds(200);
+//accounts for clockwise 90 degree, counterclockwise 90 degree, and 180 degree turns
+int angle;
+  if (dir == 1) {// clockwise
+    digitalWrite(4+3*(motor-1), LOW); 
+    angle = 400;
   }
-  delay(200);
+  else if (dir == 2) {// 180
+    digitalWrite(4+3*(motor-1), HIGH); 
+    angle = 800;
+  }
+  else {// counterclockwise
+    digitalWrite(4+3*(motor-1), HIGH); 
+    angle = 400;
+  }
+  for (int x = 0; x < angle; x++) {
+      digitalWrite(3+3*(motor-1), HIGH);
+      delayMicroseconds(200);
+      digitalWrite(3+3*(motor-1), LOW);
+      delayMicroseconds(200);
+    }
 }

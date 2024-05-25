@@ -217,19 +217,19 @@ for character in movesstring:
             newmoves += "6"
             continue
         case "R":
-            newmoves += "3"
+            newmoves += "2"
             continue
         case "F":
-            newmoves += "2"
+            newmoves += "3"
             continue
         case "D":
             newmoves += "5"
             continue
         case "L":
-            newmoves += "1"
+            newmoves += "4"
             continue
         case "B":
-            newmoves += "4"
+            newmoves += "1"
             continue
         case "1": #clockwise
             newmoves += "0"
@@ -258,7 +258,7 @@ print(newmoves)
 import serial
 import time
 
-ser = serial.Serial('/dev/cu.usbserial-210', 9600, timeout=1)
+ser = serial.Serial('COM6', 9600, timeout=1)
 time.sleep(2)  
 
 def send_commands(commands):
