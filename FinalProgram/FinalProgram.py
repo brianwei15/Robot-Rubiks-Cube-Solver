@@ -177,6 +177,21 @@ def main():
             # Flatten the grid of letters into a single string and append to accumulated_letters
             current_letters = ''.join([''.join(row[::-1]) for row in current_letters_grid])
             if current_letters:
+                match len(accumulated_letters):
+                    case 0:
+                        current_letters = current_letters[:4] + "W" + current_letters[5:]
+                    case 9:
+                        current_letters = current_letters[:4] + "O" + current_letters[5:]
+                    case 18:
+                        current_letters = current_letters[:4] + "B" + current_letters[5:]
+                    case 27:
+                        current_letters = current_letters[:4] + "Y" + current_letters[5:]
+                    case 36:
+                        current_letters = current_letters[:4] + "R" + current_letters[5:]
+                    case 45:
+                        current_letters = current_letters[:4] + "G" + current_letters[5:]
+                    case _:
+                        pass
                 accumulated_letters += current_letters
                 print("Output:", accumulated_letters)
 
@@ -258,7 +273,7 @@ print(newmoves)
 import serial
 import time
 
-ser = serial.Serial('COM6', 9600, timeout=1)
+ser = serial.Serial('/dev/cu.usbserial-210', 9600, timeout=1)
 time.sleep(2)  
 
 def send_commands(commands):
