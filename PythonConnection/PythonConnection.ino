@@ -65,4 +65,5 @@ int angle;
       digitalWrite(3+3*(motor-1), LOW);
       delayMicroseconds(200);
     }
+    // delay(20);
 }
