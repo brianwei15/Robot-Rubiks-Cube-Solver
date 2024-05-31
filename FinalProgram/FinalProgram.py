@@ -216,7 +216,7 @@ import twophase.solver  as sv
 cubestring = colorToSide
 
 #map solution string to string that arduino can read
-moves = sv.solve(cubestring, 19, 2)
+moves = sv.solve(cubestring, 16, 10)
 
 print(moves)
 
@@ -224,6 +224,8 @@ nummoves = moves[-4:-2] #the number of moves needed to solve the cube
 print("num of moves: " + nummoves)
 movesstring = moves[:-6] #substring the last part of the string which outputs the number of moves it will take
 newmoves = "" #new formatted string
+
+totalturns = 0
 
 #map characters in moves to new string in the format of motornum + move direction
 for character in movesstring:
@@ -248,18 +250,22 @@ for character in movesstring:
             continue
         case "1": #clockwise
             newmoves += "0"
+            totalturns += 1
             continue
         case "2": #180degrees
             newmoves += "2"
+            totalturns += 2
             continue
         case "3": #counterclockwise
             newmoves += "1"
+            totalturns += 1
             continue
         case default:
             continue
 
 
 print(newmoves)
+print(totalturns)
 
 # WG
 # OW
@@ -273,7 +279,7 @@ print(newmoves)
 import serial
 import time
 
-ser = serial.Serial('/dev/cu.usbserial-210', 9600, timeout=1)
+ser = serial.Serial('COM6', 9600, timeout=1)
 time.sleep(2)  
 
 def send_commands(commands):

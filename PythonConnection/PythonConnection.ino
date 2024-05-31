@@ -61,9 +61,9 @@ int angle;
   }
   for (int x = 0; x < angle; x++) {
       digitalWrite(3+3*(motor-1), HIGH);
-      delayMicroseconds(200);
+      delayMicroseconds(100);
       digitalWrite(3+3*(motor-1), LOW);
-      delayMicroseconds(200);
+      delayMicroseconds(100);
     }
     // delay(20);
 }
